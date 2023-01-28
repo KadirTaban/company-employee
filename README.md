@@ -15,7 +15,7 @@ tüm şirketleride çekebilirsiniz.
 
 _COMPANY EMPLOYEE API'S_
 
-**Swagger Url:**[ 127.0.0.1:8080/swagger-ui.html/]()
+**Swagger Url:** http://127.0.0.1:8080/swagger-ui.html/
 
 ![](images/Screenshot%202023-01-28%20at%2018.32.31.png)
 

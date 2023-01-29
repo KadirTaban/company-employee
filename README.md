@@ -10,7 +10,9 @@ Dependencies:
 ### Description[TR]:
 
 spring.datasource.url=${your_db_url}
+
 spring.datasource.username=${your_username}
+
 spring.datasource.password=${your_password}
 
 

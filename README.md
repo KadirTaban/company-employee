@@ -9,6 +9,12 @@ Dependencies:
 
 ### Description[TR]:
 
+spring.datasource.url=${your_db_url}
+spring.datasource.username=${your_username}
+spring.datasource.password=${your_password}
+
+
+
 Spring Boot Projesi olan "company-employee" Spring Boot Maven ile geliştirilmiştir.
 Şirketinize eleman ekleyip, silip, güncelleyebilirsiniz. Şirketinizdeki elemanları, şu ana kadar tüm kaydolmuş elemanları,
 tüm şirketleride çekebilirsiniz.

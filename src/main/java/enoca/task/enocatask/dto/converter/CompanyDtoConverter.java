@@ -14,10 +14,7 @@ public class CompanyDtoConverter {
     public CompanyDto convertToCompanyDto(Company from){
         return CompanyDto.builder()
                 .companyName(from.getCompanyName())
-                .employees(from.getEmployees() == null ? null :
-                        from.getEmployees().stream()
-                                .map(companyEmployeeDtoConverter::convertToDto)
-                                .collect(Collectors.toSet()))
+
                 .id(from.getId())
                 .build();
 

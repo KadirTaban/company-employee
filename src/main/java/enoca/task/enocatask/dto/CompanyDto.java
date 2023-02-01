@@ -12,6 +12,5 @@ import java.util.Set;
 @AllArgsConstructor
 public class CompanyDto {
     private String companyName;
-    private Set<CompanyEmployeeDto> employees;
     private Long id;
 }

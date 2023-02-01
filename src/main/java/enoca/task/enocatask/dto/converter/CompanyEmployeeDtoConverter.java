@@ -11,6 +11,7 @@ public class CompanyEmployeeDtoConverter {
                 .id(from.getId())
                 .email(from.getEmail())
                 .fullName(from.getFullName())
+                .entryDate(from.getEntryDate())
                 .build();
     }
 

@@ -3,6 +3,7 @@ package enoca.task.enocatask.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jdk.jfr.Timestamp;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = "employee")
+@ToString()
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 
 public class Employee extends BaseEntity {
@@ -22,9 +23,9 @@ public class Employee extends BaseEntity {
     @Column(unique = true)
     private String email;
     private int age;
-    @Timestamp
-    private LocalDateTime entryDate = LocalDateTime.now();
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @CreationTimestamp
+    private LocalDateTime entryDate;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="company_id")
     @JsonBackReference
     private Company company;

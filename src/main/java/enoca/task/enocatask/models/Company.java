@@ -14,13 +14,13 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name = "company")
 @Data
-@ToString(exclude = "company")
+@ToString()
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Company extends BaseEntity {
 
     @Column(unique = true)
     private String companyName;
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY,orphanRemoval = true, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY,orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<Employee> employees;
 

@@ -1,13 +1,13 @@
 package enoca.task.enocatask.service;
 
 import enoca.task.enocatask.dto.EmployeeDto;
-import enoca.task.enocatask.dto.converter.CompanyEmployeeDtoConverter;
 import enoca.task.enocatask.dto.converter.EmployeeDtoConverter;
 import enoca.task.enocatask.models.Company;
 import enoca.task.enocatask.models.Employee;
 import enoca.task.enocatask.repository.EmployeeRepository;
 import enoca.task.enocatask.dto.request.CreateEmployeeRequest;
 import enoca.task.enocatask.dto.request.UpdateEmployeeRequest;
+import enoca.task.enocatask.service.abstracts.EmployeeServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,15 +16,16 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class EmployeeService {
+public class EmployeeService implements EmployeeServiceImpl {
    private final EmployeeRepository employeeRepository;
    private final CompanyService companyService;
    private final EmployeeDtoConverter employeeDtoConverter;
 
+   @Override
    public EmployeeDto findEmployeeById(Long Id){
        return employeeDtoConverter.convertToEmployeeDto(employeeRepository.findById(Id).orElseThrow());
    }
-
+   @Override
     public EmployeeDto createEmployee(CreateEmployeeRequest request){
        Company company = companyService.findCompanyById(request.getCompanyId());
 
@@ -38,7 +39,7 @@ public class EmployeeService {
         return employeeDtoConverter.convertToEmployeeDto(employeeRepository.save(employee));
 
     }
-
+    @Override
     public EmployeeDto updateEmployeeById(Long id, UpdateEmployeeRequest request){
        Employee employee = employeeRepository.findEmployeeById(id);
        Employee updatedEmployee = new Employee().builder()
@@ -51,7 +52,7 @@ public class EmployeeService {
 
        return employeeDtoConverter.convertToEmployeeDto(employeeRepository.save(employee));
 }
-
+    @Override
     public EmployeeDto getEmployeeById(Long id){
         return findEmployeeById(id);
     }
@@ -60,7 +61,7 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
         return "employee has deleted succesfully ";
     }
-
+    @Override
     public List<EmployeeDto> listAllEmployee() {
         return employeeRepository.findAll()
                 .stream()

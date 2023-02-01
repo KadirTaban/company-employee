@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.time.LocalDateTime;
 @Builder
 @Data
 @NoArgsConstructor
@@ -16,5 +16,6 @@ public class CompanyEmployeeDto {
     private Long id;
     private String fullName;
     private String email;
+    private LocalDateTime entryDate;
     private int age;
 }

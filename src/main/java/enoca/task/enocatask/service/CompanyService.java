@@ -1,10 +1,13 @@
 package enoca.task.enocatask.service;
 
+import enoca.task.enocatask.exception.CompanyEmployeeNotFoundException;
+import enoca.task.enocatask.exception.CompanyNotFoundException;
 import enoca.task.enocatask.exception.GenericException;
 import enoca.task.enocatask.dto.CompanyDto;
 import enoca.task.enocatask.dto.EmployeeDto;
 import enoca.task.enocatask.dto.converter.CompanyDtoConverter;
 import enoca.task.enocatask.models.Company;
+import enoca.task.enocatask.models.Employee;
 import enoca.task.enocatask.repository.CompanyRepository;
 import enoca.task.enocatask.repository.EmployeeRepository;
 import enoca.task.enocatask.dto.converter.EmployeeDtoConverter;
@@ -25,18 +28,25 @@ public class CompanyService implements CompanyServiceImpl {
     private final EmployeeRepository employeeRepository;
     private final CompanyDtoConverter companyDtoConverter;
     private final EmployeeDtoConverter employeeDtoConverter;
+
     @Override
     public Company findCompanyById(Long Id) {
         return companyRepository.findById(Id).orElseThrow(
                 () -> GenericException.builder()
                         .httpStatus(HttpStatus.NOT_FOUND)
-                        .errorMessage("Id: "+ Id + " address not found")
+                        .errorMessage("Id: "+ Id + " Company not found")
                         .build());
     }
     @Override
     public CompanyDto createCompany(CreateCompanyRequest request){
-
-        var company = Company.builder()
+        var isAlreadyExists = companyRepository.existsByCompanyName(request.getCompanyName());
+        if(isAlreadyExists){
+            throw CompanyNotFoundException.builder()
+                    .httpStatus(HttpStatus.FOUND)
+                    .errorMessage(request.getCompanyName()+" has already exists")
+                    .build();
+        }
+        Company company = Company.builder()
                 .companyName(request.getCompanyName())
                 .build();
         return companyDtoConverter.convertToCompanyDto(companyRepository.save(company));
@@ -44,15 +54,29 @@ public class CompanyService implements CompanyServiceImpl {
     }
     @Override
     public List<EmployeeDto> listCompanyEmployee(Long id){
-
-        return employeeRepository.getByCompanyId(id) //employeeRepository
+        List<Employee> employeeList = employeeRepository.getByCompanyId(id);
+        if(employeeList.isEmpty()){
+            throw CompanyEmployeeNotFoundException.builder()
+                    .httpStatus(HttpStatus.OK)
+                    .errorMessage("Company Id:"+ id + " is empty")
+                    .build();
+        }
+        return employeeRepository.getByCompanyId(id)//employeeRepository
                 .stream()
                 .map(employeeDtoConverter::convertToEmployeeDto)
                 .collect(Collectors.toList());
 
     }
+
     @Override
     public List<CompanyDto> listCompanyAll(){
+        List<Employee> employeeList = employeeRepository.findAll();
+        if(employeeList.isEmpty()){
+            throw CompanyNotFoundException.builder()
+                    .httpStatus(HttpStatus.OK)
+                    .errorMessage("hasn't any registered employee.")
+                    .build();
+        }
         return companyRepository.findAll()
                 .stream()
                 .map(companyDtoConverter::convertToCompanyDto)
@@ -72,7 +96,7 @@ public class CompanyService implements CompanyServiceImpl {
     public String deleteCompanyById(Long id){
         Company company = findCompanyById(id);
         companyRepository.delete(company);
-        return company.getCompanyName()+" has deleted succesfully";
+        return company.getCompanyName()+"has deleted succesfully";
     }
 
 

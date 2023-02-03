@@ -33,4 +33,24 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .status(exception.getHttpStatus())
                 .body(errors);
     }
+
+    @ExceptionHandler(CompanyEmployeeNotFoundException.class)
+    public ResponseEntity<?> handleException(CompanyEmployeeNotFoundException exception) {
+        Map<String, Object> errors = new HashMap<>();
+        errors.put("message", exception.getErrorMessage());
+
+        return ResponseEntity
+                .status(exception.getHttpStatus())
+                .body(errors);
+    }
+
+    @ExceptionHandler(CompanyNotFoundException.class)
+    public ResponseEntity<?> handleException(CompanyNotFoundException exception) {
+        Map<String, Object> errors = new HashMap<>();
+        errors.put("message", exception.getErrorMessage());
+
+        return ResponseEntity
+                .status(exception.getHttpStatus())
+                .body(errors);
+    }
 }

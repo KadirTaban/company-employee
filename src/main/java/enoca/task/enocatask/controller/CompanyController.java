@@ -1,24 +1,21 @@
 package enoca.task.enocatask.controller;
 
-import enoca.task.enocatask.exception.CompanyEmployeeNotFoundException;
-import enoca.task.enocatask.service.CompanyService;
+import enoca.task.enocatask.service.CompanyServiceImpl;
 import enoca.task.enocatask.dto.CompanyDto;
 import enoca.task.enocatask.dto.EmployeeDto;
 import enoca.task.enocatask.dto.request.CreateCompanyRequest;
 import enoca.task.enocatask.dto.request.UpdateCompanyRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/company")
 @RequiredArgsConstructor
 public class CompanyController {
-    private final CompanyService companyService;
+    private final CompanyServiceImpl companyService;
 
     @PostMapping("/create")
     public ResponseEntity<CompanyDto> createCompany(@RequestBody CreateCompanyRequest request){

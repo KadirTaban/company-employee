@@ -8,7 +8,7 @@ import enoca.task.enocatask.models.Company;
 
 import java.util.List;
 
-public interface CompanyServiceImpl {
+public interface CompanyService {
     Company findCompanyById(Long Id);
 
     CompanyDto createCompany(CreateCompanyRequest request);

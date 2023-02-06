@@ -1,7 +1,7 @@
 package enoca.task.enocatask.controller;
 
 import enoca.task.enocatask.dto.EmployeeDto;
-import enoca.task.enocatask.service.EmployeeService;
+import enoca.task.enocatask.service.EmployeeServiceImpl;
 import enoca.task.enocatask.dto.request.CreateEmployeeRequest;
 import enoca.task.enocatask.dto.request.UpdateEmployeeRequest;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/v1/employees")
 @RequiredArgsConstructor
 public class EmployeeController {
-    private final EmployeeService employeeService;
+    private final EmployeeServiceImpl employeeService;
 
     @PostMapping("/create")
     public ResponseEntity<EmployeeDto> createEmployee(@RequestBody CreateEmployeeRequest request){

@@ -13,7 +13,6 @@ import enoca.task.enocatask.repository.EmployeeRepository;
 import enoca.task.enocatask.dto.converter.EmployeeDtoConverter;
 import enoca.task.enocatask.dto.request.CreateCompanyRequest;
 import enoca.task.enocatask.dto.request.UpdateCompanyRequest;
-import enoca.task.enocatask.service.abstracts.CompanyServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class CompanyService implements CompanyServiceImpl {
+public class CompanyServiceImpl implements enoca.task.enocatask.service.abstracts.CompanyService {
     private final CompanyRepository companyRepository;
     private final EmployeeRepository employeeRepository;
     private final CompanyDtoConverter companyDtoConverter;

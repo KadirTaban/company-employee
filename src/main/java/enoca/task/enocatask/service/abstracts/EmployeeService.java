@@ -6,7 +6,7 @@ import enoca.task.enocatask.dto.request.UpdateEmployeeRequest;
 
 import java.util.List;
 
-public interface EmployeeServiceImpl {
+public interface EmployeeService {
 
     EmployeeDto findEmployeeById(Long Id);
 

@@ -1,11 +1,9 @@
 package enoca.task.enocatask.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.*;
-import org.apache.tomcat.jni.Address;
 
-import javax.persistence.*;
 import java.util.Set;
 
 @Entity

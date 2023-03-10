@@ -1,8 +1,8 @@
 package enoca.task.enocatask.models;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
-import javax.persistence.*;
 
 @MappedSuperclass
 @Data
